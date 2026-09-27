@@ -8019,3 +8019,304 @@ body[data-theme="light"] .feedback-card {
 .school-mode .mini-particle.confetti {
   display: none;
 }
+/* =========================================
+   TM ARCADE - V2.1 WHAT'S NEW CARD
+   Automatically follows every theme
+   ========================================= */
+
+.whats-new-card {
+    width: min(720px, calc(100% - 24px));
+    margin: 24px auto;
+
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+
+    border-radius: 34px;
+
+    background:
+        radial-gradient(
+            circle at 8% 0%,
+            color-mix(in srgb, var(--accent) 16%, transparent),
+            transparent 48%
+        ),
+        radial-gradient(
+            circle at 95% 100%,
+            color-mix(in srgb, var(--accent-2) 12%, transparent),
+            transparent 45%
+        ),
+        var(--glass-layer),
+        var(--glass);
+
+    border: 1px solid var(--glass-border);
+
+    box-shadow:
+        var(--glass-shadow),
+        0 0 35px color-mix(in srgb, var(--accent) 12%, transparent),
+        var(--glass-sheen);
+
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+
+    color: var(--text);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+/* Glass highlight */
+.whats-new-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,0.10),
+            transparent 35%
+        );
+
+    pointer-events: none;
+}
+
+/* Theme glow */
+.whats-new-card::after {
+    content: "";
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    top: -150px;
+    right: -80px;
+
+    border-radius: 50%;
+
+    background:
+        color-mix(in srgb, var(--accent) 18%, transparent);
+
+    filter: blur(70px);
+    pointer-events: none;
+}
+
+
+/* HEADER */
+
+.whats-new-header {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.whats-new-icon {
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 14px;
+
+    background:
+        color-mix(in srgb, var(--accent) 15%, var(--glass-strong));
+
+    border: 1px solid
+        color-mix(in srgb, var(--accent) 35%, transparent);
+
+    box-shadow:
+        0 0 22px
+        color-mix(in srgb, var(--accent) 15%, transparent);
+
+    font-size: 20px;
+}
+
+.whats-new-title {
+    min-width: 0;
+}
+
+.whats-new-title h2 {
+    margin: 0;
+
+    color: var(--text);
+
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.whats-new-title p {
+    margin: 4px 0 0;
+
+    color: var(--muted);
+
+    font-size: 11px;
+}
+
+
+.whats-new-version {
+    margin-left: auto;
+
+    padding: 6px 10px;
+
+    border-radius: 999px;
+
+    background:
+        color-mix(in srgb, var(--accent) 15%, transparent);
+
+    border: 1px solid
+        color-mix(in srgb, var(--accent) 35%, transparent);
+
+    color: var(--text);
+
+    font-size: 10px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+
+/* UPDATE LIST */
+
+.whats-new-list {
+    display: grid;
+    gap: 8px;
+
+    margin-top: 18px;
+
+    position: relative;
+    z-index: 1;
+}
+
+.whats-new-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 10px 12px;
+
+    border-radius: 15px;
+
+    background:
+        color-mix(in srgb, var(--glass-strong) 70%, transparent);
+
+    border: 1px solid rgba(255,255,255,0.06);
+
+    transition:
+        transform 0.18s ease,
+        background 0.18s ease,
+        border-color 0.18s ease;
+}
+
+.whats-new-item:hover {
+    transform: translateX(4px);
+
+    background:
+        color-mix(in srgb, var(--accent) 9%, var(--glass-strong));
+
+    border-color:
+        color-mix(in srgb, var(--accent) 25%, transparent);
+}
+
+.whats-new-item-icon {
+    width: 24px;
+
+    flex-shrink: 0;
+
+    text-align: center;
+
+    font-size: 14px;
+}
+
+.whats-new-item p {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+.whats-new-item strong {
+    color: var(--text);
+}
+
+
+/* FOOTER */
+
+.whats-new-footer {
+    position: relative;
+    z-index: 1;
+
+    margin-top: 17px;
+    padding-top: 15px;
+
+    border-top: 1px solid rgba(255,255,255,0.07);
+
+    color: var(--muted);
+
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.whats-new-footer strong {
+    color: var(--text);
+}
+
+
+/* HOVER */
+
+.whats-new-card:hover {
+    transform: translateY(-4px);
+
+    border-color:
+        color-mix(in srgb, var(--accent) 45%, transparent);
+
+    box-shadow:
+        var(--glass-shadow),
+        0 18px 45px
+        color-mix(in srgb, var(--accent) 14%, transparent),
+        var(--glass-sheen);
+}
+
+
+/* ANIMATION */
+
+body:not(.motion-off):not([data-performance="low"]) .whats-new-card {
+    animation: rise-in 0.55s ease both;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 640px) {
+    .whats-new-card {
+        width: calc(100% - 16px);
+        padding: 18px;
+        border-radius: 26px;
+    }
+
+    .whats-new-title h2 {
+        font-size: 16px;
+    }
+
+    .whats-new-version {
+        padding: 5px 8px;
+        font-size: 9px;
+    }
+
+    .whats-new-item {
+        padding: 9px 10px;
+    }
+
+    .whats-new-item p {
+        font-size: 11px;
+    }
+}
