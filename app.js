@@ -1857,7 +1857,7 @@ const translations = {
     nav_about: "About",
     nav_bank: "Bank",
     nav_shop: "Shop",
-    emergency: "Emergency",
+    emergency: "Return To Class",
     home_label: "Home Screen",
     welcome: "Welcome",
     home_tagline: "A clean, high‑tech launchpad. Pick a game to open its dedicated play page.",
