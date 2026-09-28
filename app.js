@@ -1857,7 +1857,7 @@ const translations = {
     nav_about: "About",
     nav_bank: "Bank",
     nav_shop: "Shop",
-    emergency: "Return To Class",
+    emergency: "Emergency",
     home_label: "Home Screen",
     welcome: "Welcome",
     home_tagline: "A clean, high‑tech launchpad. Pick a game to open its dedicated play page.",
@@ -11776,7 +11776,7 @@ const ensurePlayControls = () => {
   controls.className = "play-controls game-hud-controls";
   controls.innerHTML = `
     <a class="pill ghost link-pill play-back" href="index.html">Back to Home</a>
-    <button class="pill ghost play-emergency" type="button" id="emergency">Return To Class</button>
+    <button class="pill ghost play-emergency" type="button" id="emergency">Emergency</button>
   `;
   if (!controls.parentNode) {
     document.body.appendChild(controls);
