@@ -11776,7 +11776,7 @@ const ensurePlayControls = () => {
   controls.className = "play-controls game-hud-controls";
   controls.innerHTML = `
     <a class="pill ghost link-pill play-back" href="index.html">Back to Home</a>
-    <button class="pill ghost play-emergency" type="button" id="emergency">Emergency</button>
+    <button class="pill ghost play-emergency" type="button" id="emergency">Return To Class</button>
   `;
   if (!controls.parentNode) {
     document.body.appendChild(controls);
