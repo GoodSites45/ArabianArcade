@@ -9,479 +9,790 @@
     <link rel="stylesheet" href="styles.css">
 
     <style>
-        .terms-page {
-            max-width: 900px;
-            margin: 50px auto;
-            padding: 40px;
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            font-family: Arial, Helvetica, sans-serif;
+
             color: #ffffff;
+
+            background:
+                radial-gradient(
+                    circle at 15% 10%,
+                    rgba(0, 150, 255, 0.20),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 85% 90%,
+                    rgba(0, 90, 255, 0.16),
+                    transparent 35%
+                ),
+                #050b14;
         }
 
-        .terms-page h1 {
-            font-size: 38px;
-            margin-bottom: 10px;
-            color: #66c7ff;
+        .terms-container {
+            width: min(900px, 92%);
+            margin: 55px auto;
+            padding: 45px;
+
+            background: rgba(10, 35, 60, 0.55);
+
+            border: 1px solid rgba(120, 210, 255, 0.20);
+            border-radius: 24px;
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            box-shadow:
+                0 25px 70px rgba(0, 0, 0, 0.40),
+                inset 0 1px 1px rgba(255, 255, 255, 0.08);
         }
 
-        .terms-page .updated {
-            color: rgba(255, 255, 255, 0.55);
+        .terms-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .terms-header h1 {
+            margin: 0 0 10px;
+
+            font-size: clamp(32px, 6vw, 48px);
+            font-weight: 700;
+
+            color: #72d1ff;
+
+            text-shadow:
+                0 0 25px rgba(50, 190, 255, 0.25);
+        }
+
+        .terms-header p {
+            margin: 0;
+
+            color: rgba(255, 255, 255, 0.50);
+            font-size: 14px;
+        }
+
+        .intro {
+            padding: 20px;
+            margin-bottom: 35px;
+
+            background: rgba(0, 150, 255, 0.10);
+
+            border: 1px solid rgba(100, 205, 255, 0.25);
+            border-left: 4px solid #39bdff;
+
+            border-radius: 13px;
+        }
+
+        .intro p {
+            margin: 0;
+
+            color: rgba(255, 255, 255, 0.88);
+            line-height: 1.7;
+        }
+
+        .section {
             margin-bottom: 35px;
         }
 
-        .terms-page h2 {
-            margin-top: 35px;
-            margin-bottom: 10px;
-            color: #8bd8ff;
-            font-size: 22px;
+        .section h2 {
+            margin: 0 0 12px;
+
+            color: #8bdcff;
+            font-size: 21px;
         }
 
-        .terms-page p {
-            color: rgba(255, 255, 255, 0.85);
-            line-height: 1.7;
+        .section p {
+            margin: 0 0 13px;
+
+            color: rgba(255, 255, 255, 0.82);
+
             font-size: 15px;
+            line-height: 1.75;
         }
 
-        .terms-page ul {
-            color: rgba(255, 255, 255, 0.85);
+        .section ul {
+            margin: 10px 0 15px;
+            padding-left: 24px;
+
+            color: rgba(255, 255, 255, 0.82);
+
+            font-size: 15px;
             line-height: 1.8;
         }
 
-        .terms-page li {
-            margin-bottom: 8px;
+        .section li {
+            margin-bottom: 6px;
         }
 
-        .terms-warning {
+        .info-box {
             padding: 18px;
-            margin: 25px 0;
+            margin: 15px 0;
+
+            background: rgba(0, 0, 0, 0.16);
+
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            border-radius: 13px;
+        }
+
+        .info-box p {
+            margin: 0;
+        }
+
+        .info-box strong {
+            color: #83d8ff;
+        }
+
+        .warning-box {
+            padding: 18px;
+            margin: 20px 0;
+
+            background: rgba(255, 170, 0, 0.07);
+
+            border: 1px solid rgba(255, 190, 70, 0.25);
+            border-left: 4px solid #ffbd4a;
+
+            border-radius: 13px;
+        }
+
+        .warning-box p {
+            margin: 0;
+
+            color: rgba(255, 255, 255, 0.82);
+            line-height: 1.7;
+        }
+
+        .back-button {
+            display: inline-block;
+
+            margin-top: 5px;
+            padding: 13px 24px;
+
+            color: #ffffff;
+            text-decoration: none;
+
+            font-size: 15px;
+            font-weight: 600;
+
+            background: rgba(0, 150, 255, 0.24);
+
+            border: 1px solid rgba(100, 210, 255, 0.45);
             border-radius: 12px;
 
-            background: rgba(0, 140, 255, 0.12);
-            border: 1px solid rgba(100, 200, 255, 0.25);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+
+            box-shadow:
+                0 5px 20px rgba(0, 130, 255, 0.20);
+
+            transition: all 0.25s ease;
         }
 
-        .terms-back {
-            display: inline-block;
-            margin-top: 30px;
+        .back-button:hover {
+            background: rgba(0, 160, 255, 0.40);
+
+            border-color: rgba(130, 220, 255, 0.75);
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 28px rgba(0, 140, 255, 0.32);
+        }
+
+        .footer {
+            margin-top: 35px;
+            padding-top: 25px;
+
+            border-top: 1px solid rgba(255, 255, 255, 0.10);
+
+            color: rgba(255, 255, 255, 0.42);
+
+            font-size: 13px;
+            line-height: 1.65;
+        }
+
+        @media (max-width: 600px) {
+
+            .terms-container {
+                width: 94%;
+                margin: 25px auto;
+                padding: 25px 20px;
+
+                border-radius: 18px;
+            }
+
+            .terms-header {
+                margin-bottom: 30px;
+            }
+
+            .section h2 {
+                font-size: 19px;
+            }
+
+            .section p,
+            .section ul {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-<main class="terms-page">
+<main class="terms-container">
 
-    <h1>Terms & Conditions</h1>
+    <header class="terms-header">
+        <h1>Terms & Conditions</h1>
+        <p>Last Updated: October 2, 2026</p>
+    </header>
 
-    <p class="updated">
-        Last Updated: October 2, 2026
-    </p>
 
-    <p>
-        Welcome to our website. This website is a gaming and entertainment
-        website created for users to access games and other features.
-        By visiting or using this website, you agree to follow these
-        Terms & Conditions.
-    </p>
-
-    <div class="terms-warning">
+    <div class="intro">
         <p>
-            <strong>Please read this:</strong>
-            This website is provided for entertainment and educational
-            purposes. You are responsible for making sure that your use
-            of this website is allowed by your school, parents, guardians,
-            teachers, or other applicable rules.
+            By accessing or using this website, you acknowledge that you
+            have read, understood, and agree to follow these Terms &
+            Conditions. If you do not agree with these terms, please do
+            not use this website.
         </p>
     </div>
 
 
-    <h2>1. Using This Website</h2>
-
-    <p>
-        You may use this website for its intended purpose, including
-        playing games and viewing content that is made available on the site.
-    </p>
+    <!-- 1 -->
 
-    <p>
-        You agree not to use the website for illegal activities, to damage
-        the website, or to interfere with other people's ability to use it.
-    </p>
+    <section class="section">
+        <h2>1. About This Website</h2>
 
-    <p>
-        You are responsible for your own actions while using the website.
-        If you are not allowed to use gaming websites or similar services,
-        you should not use this website.
-    </p>
-
-
-    <h2>2. School Rules</h2>
-
-    <p>
-        This website does not replace or override any school rules.
-        Your school may have rules about when and where students are
-        allowed to use websites, games, computers, phones, or other devices.
-    </p>
+        <p>
+            This website is a gaming and entertainment website designed
+            to provide users with access to games and other website features.
+        </p>
+
+        <p>
+            Features, games, pages, and other parts of the website may be
+            changed, updated, removed, or temporarily unavailable at any time.
+        </p>
+    </section>
 
-    <p>
-        You are responsible for following those rules.
-    </p>
 
-    <p>
-        For example, you should not use this website during class if your
-        teacher or school does not allow gaming or personal website use.
-        You should also follow any rules regarding school-owned computers,
-        networks, internet connections, and devices.
-    </p>
-
-    <p>
-        We are not responsible for disciplinary action that may occur
-        because someone used this website against their school's rules.
-    </p>
-
-
-    <h2>3. Parents and Guardians</h2>
-
-    <p>
-        If you are under the age required to use certain online services,
-        you should have permission from a parent or guardian when required.
-    </p>
-
-    <p>
-        Parents and guardians are responsible for deciding whether a child
-        may use this website when applicable.
-    </p>
-
+    <!-- 2 -->
 
-    <h2>4. Appropriate Behavior</h2>
-
-    <p>
-        Users are expected to behave responsibly and respectfully.
-        You may not use this website to intentionally harm, threaten,
-        harass, or bully another person.
-    </p>
-
-    <p>You must not use the website to:</p>
-
-    <ul>
-        <li>Threaten or harass other people.</li>
-        <li>Bullying or encourage bullying.</li>
-        <li>Impersonate another person.</li>
-        <li>Share illegal or threatening material.</li>
-        <li>Share sexually explicit or inappropriate material.</li>
-        <li>Encourage violence or dangerous activities.</li>
-        <li>Attempt to harm another user's account or device.</li>
-        <li>Intentionally disrupt the website.</li>
-    </ul>
-
-
-    <h2>5. Games</h2>
-
-    <p>
-        The main purpose of this website is to provide access to games
-        and entertainment.
-    </p>
-
-    <p>
-        Games may be provided directly by this website or may be hosted,
-        developed, or provided by other companies or developers.
-    </p>
+    <section class="section">
+        <h2>2. Responsible Use</h2>
 
-    <p>
-        We cannot guarantee that every game will always work correctly,
-        remain available, or be compatible with every device.
-    </p>
+        <p>
+            You agree to use this website responsibly and for its intended
+            purpose.
+        </p>
 
-    <p>
-        Games may also have their own rules, terms, privacy policies,
-        advertisements, or requirements. You should follow the rules
-        that apply to each game you use.
-    </p>
+        <p>
+            You must not use the website to participate in illegal activity,
+            intentionally damage the website, interfere with other users,
+            or attempt to gain unauthorized access to systems or information.
+        </p>
+    </section>
+
+
+    <!-- 3 -->
+
+    <section class="section">
+        <h2>3. School Rules</h2>
+
+        <p>
+            This website does not replace or override school rules,
+            classroom rules, device policies, or internet-use policies.
+        </p>
+
+        <p>
+            If your school, teacher, parent, guardian, or other authority
+            does not allow you to use gaming websites, you should not use
+            this website.
+        </p>
+
+        <p>
+            You are responsible for following the rules that apply to you.
+        </p>
+
+        <p>
+            We are not responsible for disciplinary action taken by a
+            school, teacher, parent, guardian, or other authority because
+            of your use of this website.
+        </p>
+    </section>
+
+
+    <!-- 4 -->
 
+    <section class="section">
+        <h2>4. Appropriate Behavior</h2>
+
+        <p>
+            Users are expected to treat other people respectfully.
+            You may not use this website to harm, threaten, harass,
+            or bully another person.
+        </p>
+
+        <p>You may not:</p>
+
+        <ul>
+            <li>Threaten or harass another person.</li>
+            <li>Bullying or encourage bullying.</li>
+            <li>Impersonate another person.</li>
+            <li>Share illegal or threatening content.</li>
+            <li>Share inappropriate or harmful material.</li>
+            <li>Attempt to harm another user.</li>
+            <li>Intentionally disrupt the website.</li>
+            <li>Attempt to access private information.</li>
+        </ul>
+    </section>
+
+
+    <!-- 5 -->
+
+    <section class="section">
+        <h2>5. Games</h2>
+
+        <p>
+            Games available through this website may be created by us
+            or by third-party developers.
+        </p>
+
+        <p>
+            Third-party games may have their own rules, terms, privacy
+            policies, advertisements, and requirements.
+        </p>
+
+        <p>
+            We do not guarantee that every game will always work correctly,
+            remain available, or be compatible with every device.
+        </p>
+    </section>
+
+
+    <!-- 6 -->
+
+    <section class="section">
+        <h2>6. Accounts and Passwords</h2>
+
+        <p>
+            Certain features may require you to create an account.
+            When you create an account, we may collect information such
+            as your username and password credentials.
+        </p>
+
+        <div class="info-box">
+            <p>
+                <strong>Password Security:</strong>
+                Passwords are intended to be stored using hashing rather
+                than as readable plain-text passwords. The original
+                password should not be directly viewable from the stored
+                password data.
+            </p>
+        </div>
+
+        <p>
+            Authorized administrators may have access to administrative
+            tools that allow them to manage accounts, review account
+            information, investigate security issues, or perform
+            password resets.
+        </p>
+
+        <p>
+            Administrators should not have access to a user's original
+            plain-text password.
+        </p>
+
+        <p>
+            You are responsible for keeping your password private.
+            Do not intentionally share your password with other users.
+        </p>
+    </section>
+
+
+    <!-- 7 -->
+
+    <section class="section">
+        <h2>7. Information We Collect</h2>
+
+        <p>
+            Depending on the features you use, we may collect information
+            necessary to operate, maintain, and protect the website.
+        </p>
+
+        <p>This may include:</p>
+
+        <ul>
+            <li>Your username or account identifier.</li>
+            <li>Hashed password information used for authentication.</li>
+            <li>Information you provide when creating an account.</li>
+            <li>Basic browser and device information.</li>
+            <li>Website usage information.</li>
+            <li>Security and abuse-prevention information.</li>
+            <li>Information needed to troubleshoot technical problems.</li>
+        </ul>
+
+        <p>
+            We do not intentionally ask users to provide unnecessary
+            sensitive personal information.
+        </p>
+    </section>
+
+
+    <!-- 8 -->
+
+    <section class="section">
+        <h2>8. Security and Suspicious Activity</h2>
+
+        <p>
+            We may monitor website activity for security and abuse
+            prevention purposes.
+        </p>
+
+        <p>
+            This may include detecting unusual login activity, repeated
+            failed login attempts, attempts to bypass security, automated
+            abuse, unauthorized access attempts, or other suspicious behavior.
+        </p>
+
+        <p>
+            Security information may be reviewed by authorized
+            administrators when necessary to protect the website,
+            investigate abuse, or maintain website security.
+        </p>
+    </section>
+
+
+    <!-- 9 -->
+
+    <section class="section">
+        <h2>9. Microsoft Clarity</h2>
+
+        <p>
+            The website may use Microsoft Clarity to help us understand
+            how visitors interact with the website and to improve the
+            website's design, performance, and user experience.
+        </p>
+
+        <p>
+            Depending on configuration and applicable consent requirements,
+            Clarity may collect information about interactions with the
+            website, such as clicks, scrolling, mouse movement, page
+            information, and other interaction or diagnostic information.
+        </p>
+
+        <p>
+            Clarity may also provide session-recording and session-replay
+            functionality.
+        </p>
+
+        <div class="warning-box">
+            <p>
+                <strong>Important:</strong>
+                Microsoft Clarity has its own requirements and restrictions.
+                If this website is intended for users under 18, Clarity
+                may not be appropriate for use. The website operator is
+                responsible for ensuring that analytics tools are used
+                appropriately and in accordance with applicable requirements.
+            </p>
+        </div>
+
+        <p>
+            Sensitive information should not intentionally be collected
+            through analytics tools. Appropriate masking and privacy
+            settings should be used where applicable.
+        </p>
+
+        <p>
+            For additional information about Microsoft Clarity and its
+            data practices, users should review Microsoft's current
+            documentation and privacy information.
+        </p>
+    </section>
+
+
+    <!-- 10 -->
+
+    <section class="section">
+        <h2>10. Cookies and Similar Technologies</h2>
+
+        <p>
+            The website and third-party services used by the website may
+            use cookies or similar technologies.
+        </p>
+
+        <p>
+            These technologies may be used for login sessions, website
+            functionality, preferences, security, analytics, and
+            performance monitoring.
+        </p>
+
+        <p>
+            You may be able to control cookies through your browser settings.
+            Disabling cookies may cause certain features to stop working.
+        </p>
+    </section>
+
+
+    <!-- 11 -->
+
+    <section class="section">
+        <h2>11. Cheating, Hacking, and Exploitation</h2>
+
+        <p>
+            You may not attempt to hack, attack, damage, or interfere with
+            the website or systems connected to it.
+        </p>
+
+        <p>This includes:</p>
+
+        <ul>
+            <li>Attempting to steal accounts or passwords.</li>
+            <li>Attempting to bypass security features.</li>
+            <li>Using malicious software against the website.</li>
+            <li>Intentionally overloading the website.</li>
+            <li>Attempting to access restricted information.</li>
+            <li>Exploiting bugs to harm the website or another user.</li>
+            <li>Using automated tools to abuse the service.</li>
+            <li>Attempting to interfere with another user's account.</li>
+        </ul>
+    </section>
+
+
+    <!-- 12 -->
+
+    <section class="section">
+        <h2>12. User Content</h2>
+
+        <p>
+            If the website allows users to submit usernames, comments,
+            messages, images, or other content, you are responsible for
+            what you submit.
+        </p>
+
+        <p>
+            Content must not be illegal, threatening, abusive, sexually
+            explicit, or intended to harm another person.
+        </p>
+
+        <p>
+            We may remove content that violates these Terms & Conditions
+            or creates a risk to the website or its users.
+        </p>
+    </section>
+
+
+    <!-- 13 -->
+
+    <section class="section">
+        <h2>13. Third-Party Services</h2>
+
+        <p>
+            The website may use third-party services for hosting,
+            analytics, security, authentication, games, or other features.
+        </p>
+
+        <p>
+            Third-party services may have their own terms and privacy
+            policies. We do not control the policies or practices of
+            third-party services.
+        </p>
+    </section>
+
+
+    <!-- 14 -->
+
+    <section class="section">
+        <h2>14. Privacy and Personal Information</h2>
+
+        <p>
+            We take reasonable steps to protect information handled by
+            the website. However, no online service can guarantee complete
+            security.
+        </p>
+
+        <p>
+            Do not share sensitive information such as your home address,
+            financial information, government identification numbers,
+            or passwords in public areas of the website.
+        </p>
+    </section>
+
+
+    <!-- 15 -->
+
+    <section class="section">
+        <h2>15. Website Availability</h2>
+
+        <p>
+            We may temporarily disable the website for maintenance,
+            updates, security issues, technical problems, or other reasons.
+        </p>
+
+        <p>
+            We do not guarantee that the website will always be online,
+            available, or free from errors.
+        </p>
+    </section>
+
+
+    <!-- 16 -->
+
+    <section class="section">
+        <h2>16. Downloads and External Content</h2>
+
+        <p>
+            If the website provides downloads or links to external content,
+            you are responsible for deciding whether to download or use it.
+        </p>
 
-    <h2>6. Third-Party Websites and Content</h2>
+        <p>
+            External content may be controlled by third parties and may
+            have its own rules, policies, or security risks.
+        </p>
+    </section>
 
-    <p>
-        This website may contain links, games, advertisements, embedded
-        content, or other materials provided by third parties.
-    </p>
 
-    <p>
-        Third-party websites and services are controlled by their own
-        owners. We are not responsible for the content, policies,
-        security, availability, or behavior of third-party websites.
-    </p>
+    <!-- 17 -->
 
-    <p>
-        If you leave this website and visit another website, you should
-        review that website's own terms and privacy policy.
-    </p>
+    <section class="section">
+        <h2>17. Intellectual Property</h2>
 
+        <p>
+            Original code, designs, graphics, logos, text, and other
+            materials created for this website may belong to the website
+            owner or their respective owners.
+        </p>
 
-    <h2>7. Cheating, Hacking, and Exploiting</h2>
+        <p>
+            You may not copy, sell, redistribute, or claim ownership of
+            material that you do not own or have permission to use.
+        </p>
 
-    <p>
-        You may not attempt to hack, attack, damage, or interfere with
-        this website or its servers.
-    </p>
+        <p>
+            Third-party games, logos, trademarks, and other materials
+            remain the property of their respective owners.
+        </p>
+    </section>
 
-    <p>You may not:</p>
 
-    <ul>
-        <li>Attempt to gain unauthorized access.</li>
-        <li>Attempt to access another user's account.</li>
-        <li>Attempt to steal passwords or personal information.</li>
-        <li>Attempt to bypass security systems.</li>
-        <li>Use malicious software against the website.</li>
-        <li>Intentionally overload or disrupt the website.</li>
-        <li>Exploit bugs to damage the website or other users.</li>
-        <li>Attempt to access private or restricted information.</li>
-    </ul>
+    <!-- 18 -->
 
-    <p>
-        If you discover a security problem or serious bug, please report
-        it to the person responsible for the website rather than attempting
-        to use it against the site or another user.
-    </p>
+    <section class="section">
+        <h2>18. Account Suspension</h2>
 
+        <p>
+            We may suspend, restrict, or remove access to an account or
+            the website if we believe that a user has violated these
+            Terms, abused the service, attempted to compromise security,
+            or created a significant risk to other users or the website.
+        </p>
+    </section>
 
-    <h2>8. Accounts</h2>
 
-    <p>
-        If the website allows users to create accounts, you are responsible
-        for keeping your account information secure.
-    </p>
+    <!-- 19 -->
 
-    <p>
-        You should not share your password with other people.
-        You should also not attempt to access another person's account.
-    </p>
+    <section class="section">
+        <h2>19. No Guarantee</h2>
 
-    <p>
-        If you believe someone has accessed your account without permission,
-        you should report the problem as soon as possible.
-    </p>
+        <p>
+            The website is provided on an availability basis. We do not
+            guarantee that every game, feature, page, link, or service
+            will always work without interruption or errors.
+        </p>
+    </section>
 
 
-    <h2>9. User Content</h2>
+    <!-- 20 -->
 
-    <p>
-        If the website allows users to submit usernames, comments, messages,
-        images, or other content, you are responsible for the content you
-        submit.
-    </p>
+    <section class="section">
+        <h2>20. Limitation of Responsibility</h2>
 
-    <p>
-        Do not submit content that is illegal, threatening, abusive,
-        discriminatory, sexually explicit, or intended to harm another
-        person.
-    </p>
+        <p>
+            To the extent permitted by applicable law, the website owner
+            and operators are not responsible for problems caused by
+            misuse of the website, third-party services, third-party
+            content, unavailable services, or actions taken by other users.
+        </p>
 
-    <p>
-        We may remove content that violates these Terms & Conditions or
-        that we believe may negatively affect the website or its users.
-    </p>
+        <p>
+            Nothing in these Terms is intended to remove or limit any
+            legal rights or responsibilities that cannot legally be
+            removed or limited.
+        </p>
+    </section>
 
 
-    <h2>10. Privacy</h2>
+    <!-- 21 -->
 
-    <p>
-        We respect user privacy. However, no website or internet service
-        can guarantee complete security or privacy.
-    </p>
+    <section class="section">
+        <h2>21. Changes to These Terms</h2>
 
-    <p>
-        You should avoid sharing sensitive personal information on the
-        website, including passwords, home addresses, phone numbers,
-        financial information, or other information that you do not want
-        other people to see.
-    </p>
+        <p>
+            These Terms & Conditions may be updated from time to time.
+            Changes may be posted on this page.
+        </p>
 
-    <p>
-        If this website collects personal information, that information
-        should be handled according to the website's applicable privacy
-        policy and legal requirements.
-    </p>
+        <p>
+            You should check this page periodically to review the current
+            Terms & Conditions.
+        </p>
+    </section>
 
 
-    <h2>11. Website Availability</h2>
+    <!-- 22 -->
 
-    <p>
-        We try to keep the website available, but we cannot guarantee that
-        it will always be online.
-    </p>
+    <section class="section">
+        <h2>22. If You Do Not Agree</h2>
 
-    <p>
-        The website may temporarily become unavailable because of
-        maintenance, technical problems, internet problems, server issues,
-        updates, or other circumstances.
-    </p>
+        <p>
+            If you do not agree with these Terms & Conditions, please stop
+            using the website.
+        </p>
+    </section>
 
-    <p>
-        We may also change, remove, or add features at any time.
-    </p>
 
+    <!-- 23 -->
 
-    <h2>12. No Guarantee of Error-Free Service</h2>
+    <section class="section">
+        <h2>23. Contact</h2>
 
-    <p>
-        We do our best to keep the website working properly, but errors
-        can happen.
-    </p>
+        <p>
+            If you have questions, concerns, or reports about the website
+            or these Terms & Conditions, please contact the person who
+            operates the website.
+        </p>
+    </section>
 
-    <p>
-        We do not promise that every game, page, feature, link, or other
-        part of the website will always work perfectly.
-    </p>
 
+    <!-- 24 -->
 
-    <h2>13. Downloads and Files</h2>
+    <section class="section">
+        <h2>24. Agreement</h2>
 
-    <p>
-        If the website provides files or downloads, you are responsible
-        for deciding whether you want to download or use them.
-    </p>
+        <p>
+            By accessing or continuing to use this website, you acknowledge
+            that you have read these Terms & Conditions and agree to follow
+            them.
+        </p>
+    </section>
 
-    <p>
-        You should use appropriate security software and keep your device
-        updated. Do not download files from sources that you do not trust.
-    </p>
 
-    <p>
-        We are not responsible for problems caused by third-party files,
-        downloads, or software.
-    </p>
-
-
-    <h2>14. Prohibited Activities</h2>
-
-    <p>
-        You may not use this website to participate in illegal activities
-        or activities that could damage the website, its users, or other
-        systems.
-    </p>
-
-    <p>This includes attempting to:</p>
-
-    <ul>
-        <li>Steal information.</li>
-        <li>Break into accounts or systems.</li>
-        <li>Distribute malware.</li>
-        <li>Damage computer systems.</li>
-        <li>Commit fraud.</li>
-        <li>Harass or threaten people.</li>
-        <li>Evade security measures.</li>
-        <li>Interfere with the operation of the website.</li>
-    </ul>
-
-
-    <h2>15. Suspension or Removal</h2>
-
-    <p>
-        We may restrict, suspend, or remove access to the website for users
-        who violate these Terms & Conditions or misuse the website.
-    </p>
-
-    <p>
-        We may also remove content or accounts when necessary to protect
-        the website, its users, or its operation.
-    </p>
-
-
-    <h2>16. Intellectual Property</h2>
-
-    <p>
-        The design, original code, logos, graphics, text, and other original
-        materials created for this website may belong to the website owner
-        or their respective owners.
-    </p>
-
-    <p>
-        You may not copy, redistribute, sell, or claim ownership of
-        website content that you do not own or have permission to use.
-    </p>
-
-    <p>
-        Games, logos, trademarks, and other materials belonging to
-        third-party companies remain the property of their respective owners.
-    </p>
-
-
-    <h2>17. Copyright Complaints</h2>
-
-    <p>
-        If you believe that material on this website violates your copyright,
-        please contact the person responsible for the website and provide
-        enough information to identify the material and explain your concern.
-    </p>
-
-
-    <h2>18. Limitation of Responsibility</h2>
-
-    <p>
-        To the extent permitted by applicable law, the website and its
-        owners, operators, contributors, and administrators are not
-        responsible for losses or problems caused by a user's improper
-        use of the website, third-party services, unavailable features,
-        or actions taken by other users.
-    </p>
-
-    <p>
-        Nothing in these Terms is intended to remove or limit any rights
-        or responsibilities that cannot legally be removed or limited.
-    </p>
-
-
-    <h2>19. Your Responsibility</h2>
-
-    <p>
-        By using this website, you agree to use it responsibly and to
-        follow applicable laws, school rules, and the rules described
-        on this page.
-    </p>
-
-    <p>
-        You are responsible for your own decisions and actions while
-        using the website.
-    </p>
-
-
-    <h2>20. Changes to These Terms</h2>
-
-    <p>
-        These Terms & Conditions may be changed or updated in the future.
-        When changes are made, the updated version may be posted on this page.
-    </p>
-
-    <p>
-        You should check this page from time to time so that you are aware
-        of any changes.
-    </p>
-
-
-    <h2>21. If You Do Not Agree</h2>
-
-    <p>
-        If you do not agree with these Terms & Conditions, please stop
-        using the website.
-    </p>
-
-
-    <h2>22. Contact</h2>
-
-    <p>
-        If you have questions, concerns, or reports about the website,
-        please contact the person who operates the website.
-    </p>
-
-
-    <h2>23. Agreement</h2>
-
-    <p>
-        By continuing to use this website, you acknowledge that you have
-        read these Terms & Conditions and agree to follow them.
-    </p>
-
-    <a href="index.html" class="glass-blue-button terms-back">
+    <a href="index.html" class="back-button">
         ← Back to Home
     </a>
+
+
+    <div class="footer">
+        These Terms & Conditions are provided in plain language to explain
+        the rules and expectations for using this website. They are not
+        a substitute for legal advice. The website operator is responsible
+        for ensuring that these terms accurately describe the website's
+        actual data collection, security, analytics, and account practices.
+    </div>
 
 </main>
 
