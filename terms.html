@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Terms & Conditions | School Gaming Site</title>
+  <title>Terms & Conditions | Arabian Arcade</title>
 
   <style>
     * {
@@ -104,6 +104,40 @@
       font-size: 15px;
     }
 
+    /* Back to Home Button */
+    .home-button {
+      display: inline-block;
+      margin-top: 28px;
+      padding: 13px 24px;
+
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: bold;
+
+      background: linear-gradient(135deg, #168cff, #0066d6);
+      border: 1px solid rgba(130, 215, 255, 0.4);
+      border-radius: 12px;
+
+      box-shadow:
+        0 8px 25px rgba(0, 119, 255, 0.25),
+        inset 0 1px 1px rgba(255, 255, 255, 0.2);
+
+      transition: 0.25s ease;
+    }
+
+    .home-button:hover {
+      transform: translateY(-3px);
+      background: linear-gradient(135deg, #28a0ff, #0877e8);
+      box-shadow:
+        0 12px 30px rgba(0, 140, 255, 0.4),
+        0 0 18px rgba(30, 160, 255, 0.25);
+    }
+
+    .home-button:active {
+      transform: translateY(0);
+    }
+
     .footer {
       text-align: center;
       margin-top: 30px;
@@ -200,8 +234,17 @@
 
     </section>
 
+    <div style="text-align: center;">
+      <a
+        class="home-button"
+        href="https://goodsites45.github.io/ArabianArcade/terms.html"
+      >
+        ← Back to Home
+      </a>
+    </div>
+
     <footer class="footer">
-      © 2026 School Gaming Site · Made for students 🎮
+      Ahmad Abu Sammour 2026 · TMArcade · Arabian Arcade 🎮
     </footer>
 
   </main>
