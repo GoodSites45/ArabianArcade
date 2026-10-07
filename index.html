@@ -1,131 +1,101 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Exclusive</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-
-:root {
-    --cyan: #00d9ff;
-    --blue: #2563ff;
-    --purple: #9b5cff;
-    --pink: #ff3cac;
-    --bg: #03050b;
-}
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+:root {
+    --cyan: #00d9ff;
+    --blue: #367cff;
+    --purple: #914cff;
+    --pink: #ff4fa3;
+    --bg: #03050b;
+}
+
 html,
 body {
     width: 100%;
-    min-height: 100%;
+    height: 100%;
 }
 
 body {
-    min-height: 100vh;
     overflow: hidden;
     background: var(--bg);
     color: white;
-    font-family: "Inter", Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
+
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+
     position: relative;
 }
 
 /* =========================================================
-   BACKGROUND
+   SIMPLE BACKGROUND
 ========================================================= */
 
 .background {
     position: fixed;
     inset: 0;
-    overflow: hidden;
     z-index: -10;
+
     background:
-        radial-gradient(circle at 20% 20%, rgba(0, 217, 255, .12), transparent 28%),
-        radial-gradient(circle at 80% 25%, rgba(155, 92, 255, .13), transparent 30%),
-        radial-gradient(circle at 50% 100%, rgba(255, 60, 172, .09), transparent 30%),
+        radial-gradient(
+            circle at 18% 18%,
+            rgba(0, 217, 255, .12),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 82% 75%,
+            rgba(145, 76, 255, .12),
+            transparent 30%
+        ),
         #03050b;
 }
 
-/* Moving blobs */
+/* Lightweight moving lines */
 
-.blob {
+.background::before {
+    content: "";
     position: absolute;
-    width: 350px;
-    height: 350px;
-    border-radius: 50%;
-    filter: blur(70px);
-    opacity: .35;
-    mix-blend-mode: screen;
-    pointer-events: none;
-}
+    inset: -50%;
 
-.blob1 {
-    background: #00bfff;
-    top: -100px;
-    left: -100px;
-    animation: blobOne 11s ease-in-out infinite alternate;
-}
-
-.blob2 {
-    background: #7c3cff;
-    right: -100px;
-    top: 10%;
-    animation: blobTwo 14s ease-in-out infinite alternate;
-}
-
-.blob3 {
-    background: #ff2299;
-    bottom: -150px;
-    left: 35%;
-    animation: blobThree 12s ease-in-out infinite alternate;
-}
-
-@keyframes blobOne {
-    0%   { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(180px, 120px) scale(1.3); }
-}
-
-@keyframes blobTwo {
-    0%   { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(-170px, 160px) scale(1.2); }
-}
-
-@keyframes blobThree {
-    0%   { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(130px, -100px) scale(1.3); }
-}
-
-/* Grid */
-
-.grid {
-    position: absolute;
-    inset: -100%;
     background-image:
-        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
-    background-size: 65px 65px;
-    transform: perspective(500px) rotateX(65deg);
-    transform-origin: center;
-    animation: gridScroll 14s linear infinite;
+        linear-gradient(
+            rgba(255,255,255,.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.035) 1px,
+            transparent 1px
+        );
+
+    background-size: 70px 70px;
+
+    transform: rotate(8deg);
+
+    animation: gridMove 18s linear infinite;
 }
 
-@keyframes gridScroll {
+@keyframes gridMove {
     from {
         background-position: 0 0;
     }
+
     to {
-        background-position: 0 65px;
+        background-position: 70px 70px;
     }
 }
 
@@ -135,182 +105,199 @@ body {
     position: fixed;
     inset: 0;
     pointer-events: none;
-    background: radial-gradient(
-        circle,
-        transparent 35%,
-        rgba(0,0,0,.48) 100%
-    );
+
+    background:
+        radial-gradient(
+            circle,
+            transparent 45%,
+            rgba(0,0,0,.5) 100%
+        );
+
     z-index: -2;
 }
 
-/* Mouse glow */
+/* =========================================================
+   CURSOR GLOW
+========================================================= */
 
-.mouseGlow {
+.cursorGlow {
     position: fixed;
-    width: 420px;
-    height: 420px;
+
+    width: 260px;
+    height: 260px;
+
     border-radius: 50%;
+
     pointer-events: none;
-    transform: translate(-50%, -50%);
-    background: radial-gradient(
-        circle,
-        rgba(0,217,255,.16) 0%,
-        rgba(80,70,255,.08) 35%,
-        transparent 72%
-    );
-    filter: blur(8px);
+
+    transform:
+        translate(-50%, -50%);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0,217,255,.11),
+            transparent 68%
+        );
+
     z-index: -1;
-    transition:
-        left .12s ease-out,
-        top .12s ease-out;
 }
 
 /* =========================================================
-   TOP BADGE
+   TOP LABEL
 ========================================================= */
 
-.topBadge {
+.topLabel {
     position: fixed;
+
     top: 22px;
     right: 22px;
+
     padding: 10px 15px;
-    border-radius: 999px;
+
     border: 1px solid rgba(255,255,255,.12);
-    background: rgba(255,255,255,.045);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    color: #d9e7ff;
-    font-size: 12px;
-    font-weight: 700;
+    border-radius: 999px;
+
+    background: rgba(255,255,255,.035);
+
+    color: #9eefff;
+
+    font-size: 11px;
+    font-weight: 800;
+
     letter-spacing: 1.7px;
-    box-shadow:
-        inset 0 0 18px rgba(255,255,255,.025),
-        0 0 30px rgba(0,217,255,.06);
-    z-index: 20;
-    animation: badgeFloat 3.5s ease-in-out infinite;
+
+    animation: labelFloat 4s ease-in-out infinite;
 }
 
-.topBadge span {
-    color: var(--cyan);
-}
-
-@keyframes badgeFloat {
-    0%,100% {
+@keyframes labelFloat {
+    0%, 100% {
         transform: translateY(0);
     }
+
     50% {
         transform: translateY(-4px);
     }
 }
 
 /* =========================================================
-   MAIN
+   MAIN CARD
 ========================================================= */
 
-.wrapper {
-    width: min(820px, 92vw);
-    perspective: 1200px;
-}
+.scene {
+    width: min(800px, 90vw);
 
-/* Moving card */
+    perspective: 1000px;
+}
 
 .card {
     position: relative;
-    border-radius: 32px;
-    padding: 65px 55px;
+
+    padding: 70px 55px;
+
     text-align: center;
+
+    border-radius: 30px;
 
     background:
         linear-gradient(
             135deg,
-            rgba(255,255,255,.075),
+            rgba(255,255,255,.065),
             rgba(255,255,255,.025)
         );
 
     border: 1px solid rgba(255,255,255,.13);
 
-    backdrop-filter: blur(28px);
-    -webkit-backdrop-filter: blur(28px);
-
     box-shadow:
-        0 35px 100px rgba(0,0,0,.55),
-        inset 0 0 70px rgba(255,255,255,.018);
+        0 25px 70px rgba(0,0,0,.55),
+        inset 0 0 35px rgba(255,255,255,.015);
 
     transform-style: preserve-3d;
 
-    transition:
-        transform .18s cubic-bezier(.2,.8,.2,1),
-        box-shadow .3s ease;
+    will-change: transform;
 
     overflow: hidden;
 }
 
-/* Animated border */
+/* Animated neon edge */
 
 .card::before {
     content: "";
+
     position: absolute;
     inset: -2px;
+
+    border-radius: 32px;
 
     background:
         conic-gradient(
             from 0deg,
             transparent 0deg,
-            rgba(0,217,255,.55) 50deg,
-            transparent 100deg,
-            rgba(155,92,255,.55) 180deg,
-            transparent 235deg,
-            rgba(255,60,172,.45) 310deg,
+            rgba(0,217,255,.6) 45deg,
+            transparent 90deg,
+            rgba(145,76,255,.6) 180deg,
+            transparent 230deg,
+            rgba(255,79,163,.5) 315deg,
             transparent 360deg
         );
 
-    animation: borderSpin 7s linear infinite;
+    animation: borderRotate 8s linear infinite;
+
     z-index: -2;
 }
 
 .card::after {
     content: "";
+
     position: absolute;
     inset: 1px;
-    border-radius: 31px;
-    background: rgba(5,8,17,.76);
+
+    border-radius: 29px;
+
+    background: #070a12;
+
     z-index: -1;
 }
 
-@keyframes borderSpin {
-    from {
-        transform: rotate(0deg) scale(1.15);
-    }
+@keyframes borderRotate {
     to {
-        transform: rotate(360deg) scale(1.15);
+        transform: rotate(360deg);
     }
 }
 
-/* Shine that sweeps across the card */
+/* Fast light sweep */
 
-.cardShine {
+.cardLight {
     position: absolute;
-    top: -60%;
+
+    top: -100%;
     left: -40%;
-    width: 35%;
-    height: 220%;
-    transform: rotate(25deg);
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,.09),
-        transparent
-    );
-    animation: cardShine 5s ease-in-out infinite;
+
+    width: 20%;
+    height: 300%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.08),
+            transparent
+        );
+
+    transform: rotate(22deg);
+
+    animation: lightSweep 6s ease-in-out infinite;
+
     pointer-events: none;
 }
 
-@keyframes cardShine {
-    0% {
-        left: -50%;
+@keyframes lightSweep {
+    0%, 25% {
+        left: -40%;
     }
-    55%,100% {
-        left: 150%;
+
+    70%, 100% {
+        left: 140%;
     }
 }
 
@@ -318,81 +305,96 @@ body {
    CONTENT
 ========================================================= */
 
-.pill {
+.badge {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 13px;
+
+    padding: 8px 14px;
+
     border-radius: 999px;
-    background: rgba(0,217,255,.06);
+
     border: 1px solid rgba(0,217,255,.2);
-    color: #87eaff;
-    font-size: 11px;
+
+    background: rgba(0,217,255,.045);
+
+    color: #86ebff;
+
+    font-size: 10px;
     font-weight: 800;
+
     letter-spacing: 2px;
+
     text-transform: uppercase;
+
     margin-bottom: 25px;
-    box-shadow: 0 0 25px rgba(0,217,255,.05);
-    animation: pillPulse 2.6s ease-in-out infinite;
 }
 
-.pillDot {
+.badgeDot {
     width: 6px;
     height: 6px;
-    border-radius: 50%;
-    background: var(--cyan);
-    box-shadow: 0 0 12px var(--cyan);
-    animation: dotPulse 1.2s ease-in-out infinite;
-}
 
-@keyframes pillPulse {
-    50% {
-        transform: scale(1.04);
-    }
+    border-radius: 50%;
+
+    background: var(--cyan);
+
+    box-shadow:
+        0 0 8px var(--cyan);
+
+    animation: dotPulse 1.5s infinite;
 }
 
 @keyframes dotPulse {
     50% {
-        transform: scale(1.5);
-        opacity: .55;
+        opacity: .35;
+        transform: scale(.65);
     }
 }
 
 h1 {
-    font-size: clamp(42px, 8vw, 86px);
-    font-weight: 900;
-    line-height: .92;
+    font-size: clamp(44px, 8vw, 82px);
+
+    line-height: .9;
+
     letter-spacing: -5px;
 
-    background: linear-gradient(
-        100deg,
-        #ffffff,
-        #8cecff,
-        #a98aff,
-        #ffffff,
-        #ff91d1
-    );
+    font-weight: 900;
 
-    background-size: 300% auto;
+    background:
+        linear-gradient(
+            90deg,
+            white,
+            #7deaff,
+            #a782ff,
+            white
+        );
+
+    background-size: 250% auto;
+
     -webkit-background-clip: text;
     background-clip: text;
+
     color: transparent;
 
-    animation: titleGradient 5s linear infinite;
+    animation: textShift 6s linear infinite;
 }
 
-@keyframes titleGradient {
+@keyframes textShift {
     to {
-        background-position: 300% center;
+        background-position: 250% center;
     }
 }
 
 .subtitle {
-    margin: 22px auto 0;
-    max-width: 600px;
-    color: #aebbd0;
-    font-size: 17px;
-    line-height: 1.75;
+    max-width: 590px;
+
+    margin: 25px auto 0;
+
+    color: #9ba8bd;
+
+    font-size: 16px;
+
+    line-height: 1.7;
 }
 
 .highlight {
@@ -400,201 +402,152 @@ h1 {
     font-weight: 800;
 }
 
-.nameBox {
-    margin-top: 32px;
-    padding: 18px 20px;
-    border-radius: 20px;
+/* =========================================================
+   NAME
+========================================================= */
+
+.friendBox {
     display: inline-block;
+
+    margin-top: 32px;
+
+    padding: 18px 25px;
+
+    border-radius: 18px;
+
+    border: 1px solid rgba(255,255,255,.1);
 
     background:
         linear-gradient(
             135deg,
-            rgba(0,217,255,.08),
-            rgba(155,92,255,.08)
+            rgba(0,217,255,.07),
+            rgba(145,76,255,.07)
         );
 
-    border: 1px solid rgba(255,255,255,.1);
+    animation: friendFloat 4s ease-in-out infinite;
 
-    box-shadow:
-        0 0 35px rgba(0,217,255,.06),
-        inset 0 0 25px rgba(255,255,255,.02);
-
-    animation: nameFloat 3s ease-in-out infinite;
+    will-change: transform;
 }
 
-.nameSmall {
-    color: #748198;
-    text-transform: uppercase;
-    font-size: 10px;
+.friendSmall {
+    color: #66738b;
+
+    font-size: 9px;
+
     font-weight: 800;
+
     letter-spacing: 2px;
+
+    text-transform: uppercase;
 }
 
-.nameMain {
+.friendName {
     margin-top: 5px;
-    font-size: clamp(20px, 4vw, 30px);
+
+    font-size: clamp(21px, 4vw, 29px);
+
     font-weight: 900;
-    color: #ffffff;
+
+    letter-spacing: .5px;
 }
 
-.nameMain span {
-    color: #ff688e;
-    text-shadow: 0 0 20px rgba(255,104,142,.35);
+.friendName span {
+    color: #ff648f;
+
+    text-shadow:
+        0 0 15px rgba(255,100,143,.3);
 }
 
-@keyframes nameFloat {
+@keyframes friendFloat {
     0%,100% {
         transform: translateY(0);
     }
+
     50% {
         transform: translateY(-5px);
     }
 }
 
 /* =========================================================
-   FAKE BUTTON
+   BOTTOM TEXT
 ========================================================= */
 
-.buttonArea {
-    margin-top: 35px;
+.bottomText {
+    margin-top: 28px;
+
+    color: #566279;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
 }
 
-.rageButton {
-    position: relative;
-    border: 0;
-    outline: none;
-    cursor: pointer;
-
-    padding: 15px 24px;
-    border-radius: 15px;
-
-    color: white;
-    font-size: 14px;
-    font-weight: 800;
-    letter-spacing: .5px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #087cff,
-            #7438ff,
-            #cb37ff
-        );
-
-    box-shadow:
-        0 12px 40px rgba(89,61,255,.25),
-        inset 0 1px 0 rgba(255,255,255,.2);
-
-    transition:
-        transform .2s ease,
-        box-shadow .2s ease;
-}
-
-.rageButton::before {
-    content: "";
-    position: absolute;
-    inset: 1px;
-    border-radius: 14px;
-    background: linear-gradient(
-        120deg,
-        transparent,
-        rgba(255,255,255,.18),
-        transparent
-    );
-    transform: translateX(-120%);
-    transition: transform .5s ease;
-}
-
-.rageButton:hover::before {
-    transform: translateX(120%);
-}
-
-.rageButton:hover {
-    transform: translateY(-4px) scale(1.04);
-    box-shadow:
-        0 18px 50px rgba(89,61,255,.4),
-        0 0 25px rgba(0,217,255,.14);
-}
-
-.rageButton:active {
-    transform: scale(.96);
-}
-
-.reaction {
-    margin-top: 15px;
-    min-height: 22px;
-    color: #7d8aa0;
-    font-size: 12px;
-    font-weight: 600;
-    transition: .25s ease;
+.bottomText span {
+    color: #74839c;
 }
 
 /* =========================================================
-   FLOATING PARTICLES
+   LITTLE ORBS
 ========================================================= */
 
-.particle {
+.orb {
     position: fixed;
-    width: 3px;
-    height: 3px;
+
+    width: 7px;
+    height: 7px;
+
     border-radius: 50%;
-    background: #8eeeff;
-    box-shadow: 0 0 10px #00d9ff;
-    pointer-events: none;
-    opacity: 0;
-    animation: particleFloat linear infinite;
+
+    background: var(--cyan);
+
+    box-shadow:
+        0 0 15px var(--cyan);
+
+    opacity: .4;
+
+    animation: orbFloat 7s ease-in-out infinite;
 }
 
-@keyframes particleFloat {
-    0% {
-        transform: translateY(110vh) scale(.3);
-        opacity: 0;
-    }
-
-    10% {
-        opacity: .8;
-    }
-
-    90% {
-        opacity: .8;
-    }
-
-    100% {
-        transform: translateY(-10vh) scale(1);
-        opacity: 0;
-    }
+.orb1 {
+    left: 13%;
+    top: 25%;
 }
 
-/* Small floating rings */
+.orb2 {
+    right: 13%;
+    top: 70%;
 
-.ring {
-    position: fixed;
-    width: 100px;
-    height: 100px;
-    border: 1px solid rgba(0,217,255,.14);
-    border-radius: 50%;
-    pointer-events: none;
-    animation: ringFloat 9s ease-in-out infinite;
+    animation-delay: -3s;
+
+    background: var(--purple);
+
+    box-shadow:
+        0 0 15px var(--purple);
 }
 
-.ring1 {
-    left: 8%;
-    top: 23%;
+.orb3 {
+    left: 82%;
+    top: 20%;
+
+    animation-delay: -5s;
+
+    background: var(--pink);
+
+    box-shadow:
+        0 0 15px var(--pink);
 }
 
-.ring2 {
-    right: 9%;
-    bottom: 18%;
-    animation-delay: -4s;
-    animation-duration: 11s;
-}
-
-@keyframes ringFloat {
+@keyframes orbFloat {
     0%,100% {
-        transform: translateY(0) rotate(0deg) scale(1);
+        transform: translate(0,0);
     }
+
     50% {
-        transform: translateY(-25px) rotate(180deg) scale(1.2);
+        transform: translateY(-20px);
     }
 }
 
@@ -605,19 +558,18 @@ h1 {
 @media (max-width: 650px) {
 
     body {
-        overflow-y: auto;
-        padding: 25px 0;
+        padding: 20px;
     }
 
-    .topBadge {
+    .topLabel {
         top: 12px;
         right: 12px;
-        font-size: 10px;
+        font-size: 9px;
     }
 
     .card {
-        padding: 45px 24px;
-        border-radius: 25px;
+        padding: 48px 23px;
+        border-radius: 24px;
     }
 
     .subtitle {
@@ -633,33 +585,28 @@ h1 {
 
 <body>
 
-<div class="background">
-    <div class="blob blob1"></div>
-    <div class="blob blob2"></div>
-    <div class="blob blob3"></div>
-    <div class="grid"></div>
-</div>
-
+<div class="background"></div>
 <div class="vignette"></div>
 
-<div class="mouseGlow" id="mouseGlow"></div>
+<div class="cursorGlow" id="cursorGlow"></div>
 
-<div class="topBadge">
-    <span>AHMAD</span> • FRIENDS ONLY
+<div class="topLabel">
+    AHMAD • PRIVATE
 </div>
 
-<div class="ring ring1"></div>
-<div class="ring ring2"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
 
-<div class="wrapper" id="wrapper">
+<div class="scene">
 
     <div class="card" id="card">
 
-        <div class="cardShine"></div>
+        <div class="cardLight"></div>
 
-        <div class="pill">
-            <span class="pillDot"></span>
-            PRIVATE WEBSITE
+        <div class="badge">
+            <span class="badgeDot"></span>
+            FRIENDS ONLY
         </div>
 
         <h1>
@@ -669,28 +616,24 @@ h1 {
 
         <p class="subtitle">
             This site is <span class="highlight">exclusive to AHMAD'S friends.</span>
-            Everyone else can keep scrolling.
-            Especially you.
+            If you're not one of them, you're basically just looking at this page
+            for no reason.
         </p>
 
-        <div class="nameBox">
-            <div class="nameSmall">
-                Authorized guest
+        <div class="friendBox">
+
+            <div class="friendSmall">
+                Exclusive guest
             </div>
 
-            <div class="nameMain">
+            <div class="friendName">
                 ELBOZO <span>LOSER</span>
             </div>
+
         </div>
 
-        <div class="buttonArea">
-            <button class="rageButton" id="rageButton">
-                TRY YOUR LUCK
-            </button>
-
-            <div class="reaction" id="reaction">
-                You already know this isn't going to work.
-            </div>
+        <div class="bottomText">
+            ACCESS RESERVED FOR <span>AHMAD'S FRIENDS</span>
         </div>
 
     </div>
@@ -700,177 +643,81 @@ h1 {
 <script>
 
 /* =========================================================
-   MOUSE PHYSICS
+   ULTRA LIGHT MOUSE EFFECT
 ========================================================= */
 
 const card = document.getElementById("card");
-const mouseGlow = document.getElementById("mouseGlow");
+const glow = document.getElementById("cursorGlow");
 
-let targetX = 0;
-let targetY = 0;
-let currentX = 0;
-let currentY = 0;
+let mouseX = 0;
+let mouseY = 0;
+
+let rotationX = 0;
+let rotationY = 0;
+
+let animationRunning = false;
 
 document.addEventListener("mousemove", (event) => {
 
-    const x = event.clientX;
-    const y = event.clientY;
+    mouseX = event.clientX;
+    mouseY = event.clientY;
 
-    /* Mouse glow */
+    /*
+       CSS variables are used instead of constantly
+       rebuilding lots of styles.
+    */
 
-    mouseGlow.style.left = x + "px";
-    mouseGlow.style.top = y + "px";
+    glow.style.left = mouseX + "px";
+    glow.style.top = mouseY + "px";
 
-    /* 3D card */
-
-    targetX = (window.innerWidth / 2 - x) / 30;
-    targetY = (window.innerHeight / 2 - y) / 30;
+    if (!animationRunning) {
+        animationRunning = true;
+        requestAnimationFrame(updateCard);
+    }
 });
 
-function animateCard() {
+function updateCard() {
 
-    currentX += (targetX - currentX) * 0.08;
-    currentY += (targetY - currentY) * 0.08;
+    const targetX =
+        (window.innerHeight / 2 - mouseY) / 32;
+
+    const targetY =
+        (mouseX - window.innerWidth / 2) / 32;
+
+    rotationX +=
+        (targetX - rotationX) * 0.12;
+
+    rotationY +=
+        (targetY - rotationY) * 0.12;
 
     card.style.transform =
-        `rotateX(${currentY}deg)
-         rotateY(${-currentX}deg)
-         translateZ(0)`;
+        `rotateX(${rotationX}deg)
+         rotateY(${rotationY}deg)`;
 
-    requestAnimationFrame(animateCard);
+    if (
+        Math.abs(targetX - rotationX) > .02 ||
+        Math.abs(targetY - rotationY) > .02
+    ) {
+        requestAnimationFrame(updateCard);
+    } else {
+        animationRunning = false;
+    }
 }
 
-animateCard();
+/* Reset smoothly when mouse leaves */
 
-/* =========================================================
-   PARTICLES
-========================================================= */
+document.addEventListener("mouseleave", () => {
 
-for (let i = 0; i < 65; i++) {
+    rotationX *= .7;
+    rotationY *= .7;
 
-    const particle = document.createElement("div");
-
-    particle.className = "particle";
-
-    particle.style.left =
-        Math.random() * 100 + "vw";
-
-    particle.style.animationDuration =
-        (6 + Math.random() * 13) + "s";
-
-    particle.style.animationDelay =
-        (-Math.random() * 15) + "s";
-
-    const size = 1 + Math.random() * 3;
-
-    particle.style.width = size + "px";
-    particle.style.height = size + "px";
-
-    document.body.appendChild(particle);
-}
-
-/* =========================================================
-   RAGE BUTTON
-========================================================= */
-
-const button = document.getElementById("rageButton");
-const reaction = document.getElementById("reaction");
-
-const reactions = [
-    "Bro really clicked it 💀",
-    "That button does absolutely nothing.",
-    "Nice try.",
-    "You thought there was an entrance 😭",
-    "Still not invited.",
-    "Access denied by vibes.",
-    "Elbozo has more permissions than you.",
-    "Maybe try being Ahmad's friend.",
-    "This is getting embarrassing.",
-    "Nope. Still exclusive."
-];
-
-button.addEventListener("click", () => {
-
-    const random =
-        reactions[Math.floor(Math.random() * reactions.length)];
-
-    reaction.textContent = random;
-
-    reaction.style.color = "#ff688e";
-    reaction.style.transform = "scale(1.08)";
-
-    setTimeout(() => {
-        reaction.style.color = "";
-        reaction.style.transform = "";
-    }, 350);
-
-    /* Tiny shake */
-
-    card.animate(
-        [
-            { transform: card.style.transform + " translateX(0)" },
-            { transform: card.style.transform + " translateX(-6px)" },
-            { transform: card.style.transform + " translateX(6px)" },
-            { transform: card.style.transform + " translateX(-3px)" },
-            { transform: card.style.transform + " translateX(0)" }
-        ],
-        {
-            duration: 350,
-            easing: "ease-out"
-        }
-    );
+    card.style.transform =
+        `rotateX(${rotationX}deg)
+         rotateY(${rotationY}deg)`;
 });
-
-/* =========================================================
-   BUTTON DODGES SOMETIMES
-========================================================= */
-
-button.addEventListener("mouseenter", () => {
-
-    if (Math.random() > 0.72) {
-
-        const x =
-            (Math.random() * 120) - 60;
-
-        const y =
-            (Math.random() * 45) - 22;
-
-        button.style.transform =
-            `translate(${x}px, ${y}px)`;
-    }
-});
-
-button.addEventListener("mouseleave", () => {
-
-    button.style.transform = "";
-});
-
-/* =========================================================
-   RANDOM TEXT ANIMATION
-========================================================= */
-
-const subtitle = document.querySelector(".subtitle");
-
-setInterval(() => {
-
-    if (Math.random() > 0.75) {
-
-        subtitle.animate(
-            [
-                { opacity: 1 },
-                { opacity: .55 },
-                { opacity: 1 }
-            ],
-            {
-                duration: 500,
-                easing: "ease-in-out"
-            }
-        );
-    }
-
-}, 3500);
 
 </script>
 
 </body>
 </html>
+```
