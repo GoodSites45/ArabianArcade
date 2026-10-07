@@ -1,228 +1,631 @@
-```html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Absolutely Not For You</title>
+<title>Exclusive</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+    --cyan: #00d9ff;
+    --blue: #2563ff;
+    --purple: #9b5cff;
+    --pink: #ff3cac;
+    --bg: #03050b;
+}
+
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
 }
 
 body {
     min-height: 100vh;
     overflow: hidden;
-    font-family: Arial, Helvetica, sans-serif;
-    background:
-        radial-gradient(circle at 20% 20%, #1424ff33, transparent 30%),
-        radial-gradient(circle at 80% 80%, #a100ff33, transparent 30%),
-        #03050c;
+    background: var(--bg);
     color: white;
+    font-family: "Inter", Arial, sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
-/* Animated background */
-body::before {
-    content: "";
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.background {
     position: fixed;
-    inset: -50%;
+    inset: 0;
+    overflow: hidden;
+    z-index: -10;
     background:
-        linear-gradient(90deg, transparent 49%, #ffffff08 50%, transparent 51%),
-        linear-gradient(transparent 49%, #ffffff08 50%, transparent 51%);
-    background-size: 70px 70px;
-    transform: rotate(12deg);
-    animation: gridMove 12s linear infinite;
+        radial-gradient(circle at 20% 20%, rgba(0, 217, 255, .12), transparent 28%),
+        radial-gradient(circle at 80% 25%, rgba(155, 92, 255, .13), transparent 30%),
+        radial-gradient(circle at 50% 100%, rgba(255, 60, 172, .09), transparent 30%),
+        #03050b;
+}
+
+/* Moving blobs */
+
+.blob {
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    filter: blur(70px);
+    opacity: .35;
+    mix-blend-mode: screen;
     pointer-events: none;
 }
 
-@keyframes gridMove {
-    from { transform: rotate(12deg) translate(0, 0); }
-    to { transform: rotate(12deg) translate(70px, 70px); }
+.blob1 {
+    background: #00bfff;
+    top: -100px;
+    left: -100px;
+    animation: blobOne 11s ease-in-out infinite alternate;
 }
 
-/* Top badge */
-.king {
+.blob2 {
+    background: #7c3cff;
+    right: -100px;
+    top: 10%;
+    animation: blobTwo 14s ease-in-out infinite alternate;
+}
+
+.blob3 {
+    background: #ff2299;
+    bottom: -150px;
+    left: 35%;
+    animation: blobThree 12s ease-in-out infinite alternate;
+}
+
+@keyframes blobOne {
+    0%   { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(180px, 120px) scale(1.3); }
+}
+
+@keyframes blobTwo {
+    0%   { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(-170px, 160px) scale(1.2); }
+}
+
+@keyframes blobThree {
+    0%   { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(130px, -100px) scale(1.3); }
+}
+
+/* Grid */
+
+.grid {
+    position: absolute;
+    inset: -100%;
+    background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size: 65px 65px;
+    transform: perspective(500px) rotateX(65deg);
+    transform-origin: center;
+    animation: gridScroll 14s linear infinite;
+}
+
+@keyframes gridScroll {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 0 65px;
+    }
+}
+
+/* Vignette */
+
+.vignette {
     position: fixed;
-    top: 20px;
-    right: 22px;
-    padding: 10px 16px;
-    border-radius: 999px;
-    background: #ffffff0d;
-    border: 1px solid #00d9ff66;
-    backdrop-filter: blur(15px);
-    color: #72eaff;
-    font-weight: bold;
-    letter-spacing: 1px;
-    box-shadow: 0 0 25px #00d9ff22;
-    animation: glow 2s infinite alternate;
-}
-
-@keyframes glow {
-    from { box-shadow: 0 0 10px #00d9ff22; }
-    to { box-shadow: 0 0 30px #00d9ff66; }
-}
-
-/* Main card */
-.card {
-    width: min(720px, 90%);
-    padding: 55px 40px;
-    text-align: center;
-    border-radius: 30px;
-    background: #ffffff09;
-    border: 1px solid #ffffff18;
-    backdrop-filter: blur(25px);
-    box-shadow:
-        0 30px 100px #00000099,
-        inset 0 0 50px #ffffff05;
-    position: relative;
-    z-index: 2;
-    transition: transform 0.15s ease;
-}
-
-.warning {
-    display: inline-block;
-    padding: 8px 15px;
-    border-radius: 999px;
-    background: #ff003311;
-    border: 1px solid #ff335544;
-    color: #ff6b7a;
-    font-size: 12px;
-    font-weight: bold;
-    letter-spacing: 2px;
-    margin-bottom: 25px;
-    animation: warningPulse 1.5s infinite;
-}
-
-@keyframes warningPulse {
-    50% { transform: scale(1.04); }
-}
-
-h1 {
-    font-size: clamp(40px, 8vw, 78px);
-    line-height: 0.95;
-    margin-bottom: 20px;
-    letter-spacing: -4px;
-    background: linear-gradient(
-        90deg,
-        #fff,
-        #6ee7ff,
-        #a78bfa,
-        #fff
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+        circle,
+        transparent 35%,
+        rgba(0,0,0,.48) 100%
     );
-    background-size: 300%;
-    -webkit-background-clip: text;
-    color: transparent;
-    animation: shine 4s linear infinite;
+    z-index: -2;
 }
 
-@keyframes shine {
-    to { background-position: 300%; }
+/* Mouse glow */
+
+.mouseGlow {
+    position: fixed;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+        circle,
+        rgba(0,217,255,.16) 0%,
+        rgba(80,70,255,.08) 35%,
+        transparent 72%
+    );
+    filter: blur(8px);
+    z-index: -1;
+    transition:
+        left .12s ease-out,
+        top .12s ease-out;
 }
 
-.subtitle {
-    color: #a4aec3;
-    font-size: 17px;
-    line-height: 1.7;
-}
+/* =========================================================
+   TOP BADGE
+========================================================= */
 
-.friend {
-    margin-top: 28px;
-    font-size: 28px;
-    font-weight: bold;
-    color: #fff;
-    text-shadow: 0 0 25px #9d7cffaa;
-}
-
-#insult {
-    margin-top: 20px;
-    min-height: 26px;
-    color: #ff7890;
-    font-weight: bold;
-}
-
-/* Ragebait button */
-button {
-    margin-top: 32px;
-    padding: 14px 26px;
-    border: 0;
-    border-radius: 14px;
-    color: white;
-    font-size: 15px;
-    font-weight: bold;
-    cursor: pointer;
-    background: linear-gradient(135deg, #0077ff, #8b2cff);
-    box-shadow: 0 0 25px #6a35ff55;
-    transition: 0.2s;
-}
-
-button:hover {
-    transform: scale(1.07);
-    box-shadow: 0 0 40px #6a35ff99;
-}
-
-button:active {
-    transform: scale(0.95);
-}
-
-/* Fake access bar */
-.access {
-    margin-top: 30px;
-}
-
-.bar {
-    width: 100%;
-    height: 8px;
-    background: #ffffff0c;
+.topBadge {
+    position: fixed;
+    top: 22px;
+    right: 22px;
+    padding: 10px 15px;
     border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.12);
+    background: rgba(255,255,255,.045);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    color: #d9e7ff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.7px;
+    box-shadow:
+        inset 0 0 18px rgba(255,255,255,.025),
+        0 0 30px rgba(0,217,255,.06);
+    z-index: 20;
+    animation: badgeFloat 3.5s ease-in-out infinite;
+}
+
+.topBadge span {
+    color: var(--cyan);
+}
+
+@keyframes badgeFloat {
+    0%,100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.wrapper {
+    width: min(820px, 92vw);
+    perspective: 1200px;
+}
+
+/* Moving card */
+
+.card {
+    position: relative;
+    border-radius: 32px;
+    padding: 65px 55px;
+    text-align: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.075),
+            rgba(255,255,255,.025)
+        );
+
+    border: 1px solid rgba(255,255,255,.13);
+
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+
+    box-shadow:
+        0 35px 100px rgba(0,0,0,.55),
+        inset 0 0 70px rgba(255,255,255,.018);
+
+    transform-style: preserve-3d;
+
+    transition:
+        transform .18s cubic-bezier(.2,.8,.2,1),
+        box-shadow .3s ease;
+
     overflow: hidden;
 }
 
-.progress {
-    height: 100%;
-    width: 0%;
-    border-radius: inherit;
-    background: linear-gradient(90deg, #00d9ff, #9b5cff);
-    box-shadow: 0 0 15px #00d9ff;
-    transition: width 0.4s;
+/* Animated border */
+
+.card::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+
+    background:
+        conic-gradient(
+            from 0deg,
+            transparent 0deg,
+            rgba(0,217,255,.55) 50deg,
+            transparent 100deg,
+            rgba(155,92,255,.55) 180deg,
+            transparent 235deg,
+            rgba(255,60,172,.45) 310deg,
+            transparent 360deg
+        );
+
+    animation: borderSpin 7s linear infinite;
+    z-index: -2;
 }
 
-#status {
-    margin-top: 10px;
-    color: #718096;
-    font-size: 12px;
+.card::after {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    border-radius: 31px;
+    background: rgba(5,8,17,.76);
+    z-index: -1;
 }
 
-/* Flash */
-.flash {
-    animation: flash 0.35s;
+@keyframes borderSpin {
+    from {
+        transform: rotate(0deg) scale(1.15);
+    }
+    to {
+        transform: rotate(360deg) scale(1.15);
+    }
 }
 
-@keyframes flash {
+/* Shine that sweeps across the card */
+
+.cardShine {
+    position: absolute;
+    top: -60%;
+    left: -40%;
+    width: 35%;
+    height: 220%;
+    transform: rotate(25deg);
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.09),
+        transparent
+    );
+    animation: cardShine 5s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes cardShine {
+    0% {
+        left: -50%;
+    }
+    55%,100% {
+        left: 150%;
+    }
+}
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 13px;
+    border-radius: 999px;
+    background: rgba(0,217,255,.06);
+    border: 1px solid rgba(0,217,255,.2);
+    color: #87eaff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    box-shadow: 0 0 25px rgba(0,217,255,.05);
+    animation: pillPulse 2.6s ease-in-out infinite;
+}
+
+.pillDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 12px var(--cyan);
+    animation: dotPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pillPulse {
     50% {
-        filter: brightness(2);
+        transform: scale(1.04);
     }
 }
 
-/* Mobile */
-@media(max-width:600px) {
-    .card {
-        padding: 40px 22px;
+@keyframes dotPulse {
+    50% {
+        transform: scale(1.5);
+        opacity: .55;
+    }
+}
+
+h1 {
+    font-size: clamp(42px, 8vw, 86px);
+    font-weight: 900;
+    line-height: .92;
+    letter-spacing: -5px;
+
+    background: linear-gradient(
+        100deg,
+        #ffffff,
+        #8cecff,
+        #a98aff,
+        #ffffff,
+        #ff91d1
+    );
+
+    background-size: 300% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    animation: titleGradient 5s linear infinite;
+}
+
+@keyframes titleGradient {
+    to {
+        background-position: 300% center;
+    }
+}
+
+.subtitle {
+    margin: 22px auto 0;
+    max-width: 600px;
+    color: #aebbd0;
+    font-size: 17px;
+    line-height: 1.75;
+}
+
+.highlight {
+    color: white;
+    font-weight: 800;
+}
+
+.nameBox {
+    margin-top: 32px;
+    padding: 18px 20px;
+    border-radius: 20px;
+    display: inline-block;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,217,255,.08),
+            rgba(155,92,255,.08)
+        );
+
+    border: 1px solid rgba(255,255,255,.1);
+
+    box-shadow:
+        0 0 35px rgba(0,217,255,.06),
+        inset 0 0 25px rgba(255,255,255,.02);
+
+    animation: nameFloat 3s ease-in-out infinite;
+}
+
+.nameSmall {
+    color: #748198;
+    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.nameMain {
+    margin-top: 5px;
+    font-size: clamp(20px, 4vw, 30px);
+    font-weight: 900;
+    color: #ffffff;
+}
+
+.nameMain span {
+    color: #ff688e;
+    text-shadow: 0 0 20px rgba(255,104,142,.35);
+}
+
+@keyframes nameFloat {
+    0%,100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* =========================================================
+   FAKE BUTTON
+========================================================= */
+
+.buttonArea {
+    margin-top: 35px;
+}
+
+.rageButton {
+    position: relative;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+
+    padding: 15px 24px;
+    border-radius: 15px;
+
+    color: white;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: .5px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #087cff,
+            #7438ff,
+            #cb37ff
+        );
+
+    box-shadow:
+        0 12px 40px rgba(89,61,255,.25),
+        inset 0 1px 0 rgba(255,255,255,.2);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.rageButton::before {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    border-radius: 14px;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,.18),
+        transparent
+    );
+    transform: translateX(-120%);
+    transition: transform .5s ease;
+}
+
+.rageButton:hover::before {
+    transform: translateX(120%);
+}
+
+.rageButton:hover {
+    transform: translateY(-4px) scale(1.04);
+    box-shadow:
+        0 18px 50px rgba(89,61,255,.4),
+        0 0 25px rgba(0,217,255,.14);
+}
+
+.rageButton:active {
+    transform: scale(.96);
+}
+
+.reaction {
+    margin-top: 15px;
+    min-height: 22px;
+    color: #7d8aa0;
+    font-size: 12px;
+    font-weight: 600;
+    transition: .25s ease;
+}
+
+/* =========================================================
+   FLOATING PARTICLES
+========================================================= */
+
+.particle {
+    position: fixed;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: #8eeeff;
+    box-shadow: 0 0 10px #00d9ff;
+    pointer-events: none;
+    opacity: 0;
+    animation: particleFloat linear infinite;
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translateY(110vh) scale(.3);
+        opacity: 0;
     }
 
-    .king {
-        right: 12px;
+    10% {
+        opacity: .8;
+    }
+
+    90% {
+        opacity: .8;
+    }
+
+    100% {
+        transform: translateY(-10vh) scale(1);
+        opacity: 0;
+    }
+}
+
+/* Small floating rings */
+
+.ring {
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    border: 1px solid rgba(0,217,255,.14);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: ringFloat 9s ease-in-out infinite;
+}
+
+.ring1 {
+    left: 8%;
+    top: 23%;
+}
+
+.ring2 {
+    right: 9%;
+    bottom: 18%;
+    animation-delay: -4s;
+    animation-duration: 11s;
+}
+
+@keyframes ringFloat {
+    0%,100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+    50% {
+        transform: translateY(-25px) rotate(180deg) scale(1.2);
+    }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    body {
+        overflow-y: auto;
+        padding: 25px 0;
+    }
+
+    .topBadge {
         top: 12px;
-        font-size: 11px;
+        right: 12px;
+        font-size: 10px;
+    }
+
+    .card {
+        padding: 45px 24px;
+        border-radius: 25px;
     }
 
     .subtitle {
-        font-size: 15px;
+        font-size: 14px;
+    }
+
+    h1 {
+        letter-spacing: -3px;
     }
 }
 </style>
@@ -230,139 +633,207 @@ button:active {
 
 <body>
 
-<div class="king">👑 AHMAD IS KING</div>
+<div class="background">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+    <div class="grid"></div>
+</div>
 
-<div class="card" id="card">
+<div class="vignette"></div>
 
-    <div class="warning">⚠ EXTREMELY EXCLUSIVE</div>
+<div class="mouseGlow" id="mouseGlow"></div>
 
-    <h1>YOU'RE NOT HIM.</h1>
+<div class="topBadge">
+    <span>AHMAD</span> • FRIENDS ONLY
+</div>
 
-    <div class="subtitle">
-        This website is restricted to an extremely powerful,
-        highly intelligent and definitely real group of people.
-    </div>
+<div class="ring ring1"></div>
+<div class="ring ring2"></div>
 
-    <div class="friend">
-        ✅ ELBOZO ONLY
-    </div>
+<div class="wrapper" id="wrapper">
 
-    <div id="insult">
-        Checking whether you're actually Elbozo...
-    </div>
+    <div class="card" id="card">
 
-    <div class="access">
-        <div class="bar">
-            <div class="progress" id="progress"></div>
+        <div class="cardShine"></div>
+
+        <div class="pill">
+            <span class="pillDot"></span>
+            PRIVATE WEBSITE
         </div>
 
-        <div id="status">
-            Initializing disappointment...
-        </div>
-    </div>
+        <h1>
+            YOU'RE NOT<br>
+            INVITED.
+        </h1>
 
-    <button id="button">
-        🔓 TRY TO GET IN
-    </button>
+        <p class="subtitle">
+            This site is <span class="highlight">exclusive to AHMAD'S friends.</span>
+            Everyone else can keep scrolling.
+            Especially you.
+        </p>
+
+        <div class="nameBox">
+            <div class="nameSmall">
+                Authorized guest
+            </div>
+
+            <div class="nameMain">
+                ELBOZO <span>LOSER</span>
+            </div>
+        </div>
+
+        <div class="buttonArea">
+            <button class="rageButton" id="rageButton">
+                TRY YOUR LUCK
+            </button>
+
+            <div class="reaction" id="reaction">
+                You already know this isn't going to work.
+            </div>
+        </div>
+
+    </div>
 
 </div>
 
 <script>
-const insults = [
-    "Nope.",
-    "Bro really thought he had access 💀",
-    "Interesting attempt.",
-    "Who invited you?",
-    "Elbozo has better permissions than you.",
-    "Access denied. Skill issue.",
-    "That was embarrassing.",
-    "Nice try though.",
-    "You are NOT passing this test.",
-    "Maybe ask Ahmad."
-];
 
-const statuses = [
-    "Scanning vibes...",
-    "Checking credentials...",
-    "Analyzing aura...",
-    "Comparing user to Elbozo...",
-    "Calculating importance...",
-    "Checking friendship level...",
-    "Consulting Ahmad...",
-    "Access evaluation complete."
-];
+/* =========================================================
+   MOUSE PHYSICS
+========================================================= */
 
-const insult = document.getElementById("insult");
-const progress = document.getElementById("progress");
-const status = document.getElementById("status");
-const button = document.getElementById("button");
 const card = document.getElementById("card");
+const mouseGlow = document.getElementById("mouseGlow");
 
-let progressValue = 0;
+let targetX = 0;
+let targetY = 0;
+let currentX = 0;
+let currentY = 0;
 
-function runFakeScan() {
-    progressValue = 0;
+document.addEventListener("mousemove", (event) => {
 
-    const interval = setInterval(() => {
-        progressValue += Math.random() * 14;
+    const x = event.clientX;
+    const y = event.clientY;
 
-        if (progressValue >= 100) {
-            progressValue = 100;
-            clearInterval(interval);
+    /* Mouse glow */
 
-            progress.style.width = "100%";
+    mouseGlow.style.left = x + "px";
+    mouseGlow.style.top = y + "px";
 
-            setTimeout(() => {
-                insult.textContent =
-                    insults[Math.floor(Math.random() * insults.length)];
+    /* 3D card */
 
-                status.textContent =
-                    "RESULT: ❌ ACCESS DENIED";
+    targetX = (window.innerWidth / 2 - x) / 30;
+    targetY = (window.innerHeight / 2 - y) / 30;
+});
 
-                document.body.classList.add("flash");
+function animateCard() {
 
-                setTimeout(() => {
-                    document.body.classList.remove("flash");
-                }, 350);
-            }, 500);
-
-        } else {
-            progress.style.width = progressValue + "%";
-
-            status.textContent =
-                statuses[Math.floor(Math.random() * statuses.length)];
-        }
-    }, 350);
-}
-
-button.addEventListener("click", runFakeScan);
-
-/* Random roast every few seconds */
-setInterval(() => {
-    if (Math.random() > 0.55) {
-        insult.textContent =
-            insults[Math.floor(Math.random() * insults.length)];
-    }
-}, 2500);
-
-/* Slight 3D mouse movement */
-document.addEventListener("mousemove", e => {
-    const x = (window.innerWidth / 2 - e.clientX) / 45;
-    const y = (window.innerHeight / 2 - e.clientY) / 45;
+    currentX += (targetX - currentX) * 0.08;
+    currentY += (targetY - currentY) * 0.08;
 
     card.style.transform =
-        `perspective(900px) rotateX(${y}deg) rotateY(${-x}deg)`;
+        `rotateX(${currentY}deg)
+         rotateY(${-currentX}deg)
+         translateZ(0)`;
+
+    requestAnimationFrame(animateCard);
+}
+
+animateCard();
+
+/* =========================================================
+   PARTICLES
+========================================================= */
+
+for (let i = 0; i < 65; i++) {
+
+    const particle = document.createElement("div");
+
+    particle.className = "particle";
+
+    particle.style.left =
+        Math.random() * 100 + "vw";
+
+    particle.style.animationDuration =
+        (6 + Math.random() * 13) + "s";
+
+    particle.style.animationDelay =
+        (-Math.random() * 15) + "s";
+
+    const size = 1 + Math.random() * 3;
+
+    particle.style.width = size + "px";
+    particle.style.height = size + "px";
+
+    document.body.appendChild(particle);
+}
+
+/* =========================================================
+   RAGE BUTTON
+========================================================= */
+
+const button = document.getElementById("rageButton");
+const reaction = document.getElementById("reaction");
+
+const reactions = [
+    "Bro really clicked it 💀",
+    "That button does absolutely nothing.",
+    "Nice try.",
+    "You thought there was an entrance 😭",
+    "Still not invited.",
+    "Access denied by vibes.",
+    "Elbozo has more permissions than you.",
+    "Maybe try being Ahmad's friend.",
+    "This is getting embarrassing.",
+    "Nope. Still exclusive."
+];
+
+button.addEventListener("click", () => {
+
+    const random =
+        reactions[Math.floor(Math.random() * reactions.length)];
+
+    reaction.textContent = random;
+
+    reaction.style.color = "#ff688e";
+    reaction.style.transform = "scale(1.08)";
+
+    setTimeout(() => {
+        reaction.style.color = "";
+        reaction.style.transform = "";
+    }, 350);
+
+    /* Tiny shake */
+
+    card.animate(
+        [
+            { transform: card.style.transform + " translateX(0)" },
+            { transform: card.style.transform + " translateX(-6px)" },
+            { transform: card.style.transform + " translateX(6px)" },
+            { transform: card.style.transform + " translateX(-3px)" },
+            { transform: card.style.transform + " translateX(0)" }
+        ],
+        {
+            duration: 350,
+            easing: "ease-out"
+        }
+    );
 });
 
-document.addEventListener("mouseleave", () => {
-    card.style.transform = "";
-});
+/* =========================================================
+   BUTTON DODGES SOMETIMES
+========================================================= */
 
-/* Make the button sometimes move */
 button.addEventListener("mouseenter", () => {
-    if (Math.random() > 0.65) {
-        const x = (Math.random() - 0.5) * 180;
-        const y = (Math.random() - 0.5) * 80;
+
+    if (Math.random() > 0.72) {
+
+        const x =
+            (Math.random() * 120) - 60;
+
+        const y =
+            (Math.random() * 45) - 22;
 
         button.style.transform =
             `translate(${x}px, ${y}px)`;
@@ -370,10 +841,36 @@ button.addEventListener("mouseenter", () => {
 });
 
 button.addEventListener("mouseleave", () => {
+
     button.style.transform = "";
 });
+
+/* =========================================================
+   RANDOM TEXT ANIMATION
+========================================================= */
+
+const subtitle = document.querySelector(".subtitle");
+
+setInterval(() => {
+
+    if (Math.random() > 0.75) {
+
+        subtitle.animate(
+            [
+                { opacity: 1 },
+                { opacity: .55 },
+                { opacity: 1 }
+            ],
+            {
+                duration: 500,
+                easing: "ease-in-out"
+            }
+        );
+    }
+
+}, 3500);
+
 </script>
 
 </body>
 </html>
-```
